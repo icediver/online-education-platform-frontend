@@ -1,0 +1,19 @@
+.message {
+  overflow: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar-track {
+    @apply bg-purple-700;
+  }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    max-height: 3px;
+    background-color: #0a0a1f;
+  }
+}

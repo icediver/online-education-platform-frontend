@@ -1,0 +1,88 @@
+import { FiPaperclip } from "react-icons/fi";
+import ModalSendImage from "../../modal-send-image/ModalSendImage";
+import { ChangeEventHandler, useEffect, useRef, useState } from "react";
+import clsx from "clsx";
+import styles from "./UploadFile.module.scss";
+import SendMessageButton from "../SendMessageButton";
+import { useUpload } from "../../useUpload";
+
+export default function UploadFile() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const ref = useRef<HTMLInputElement>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null | undefined>(
+    null,
+  );
+  const [preview, setPreview] = useState<string | undefined>("");
+
+  const [message, setMessage] = useState("");
+  const { uploadFile, fileUrl } = useUpload();
+  // create a preview as a side effect, whenever selected file is changed
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview(undefined);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
+  useEffect(() => console.log(isModalOpen), [isModalOpen]);
+
+  const onSelectFile: ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+
+    // I've kept this example simple by using the first image instead of multiple
+    setSelectedFile(e.target.files[0]);
+    setIsModalOpen(true);
+  };
+
+  const sendMessageHandler = async () => {
+    if (selectedFile) await uploadFile(selectedFile);
+    if (fileUrl) {
+      setMessage(fileUrl);
+    }
+  };
+  return (
+    <>
+      <label className="inline-block">
+        <FiPaperclip className="cursor-pointer" />
+        <input
+          ref={ref}
+          type="file"
+          className="hidden"
+          onChange={onSelectFile}
+        />
+      </label>
+      <ModalSendImage
+        isOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+      >
+        <div className="mx-auto h-2/3 aspect-video rounded-xl overflow-hidden">
+          {selectedFile && <img src={preview} />}
+        </div>
+        <div className="mt-1 mb-1 ml-4 text-xs text-gray-600">Add Message:</div>
+        <div className="relative pl-5 border h-14 w-full border-gray-400/30 rounded-xl mx-auto bg-[#0A0A1F] ">
+          <textarea
+            className={clsx(
+              "bg-[#0A0A1F]   text-xs h-10 p-1 text-gray-200 focus-visible:outline-none resize-none  ",
+              styles.message,
+            )}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <SendMessageButton
+            className="absolute bottom-2 right-1"
+            type="button"
+            onClick={sendMessageHandler}
+          />
+        </div>
+      </ModalSendImage>
+    </>
+  );
+}

@@ -5,23 +5,85 @@
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-end-rgb: 217, 122, 72;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-start-rgb: 205, 100, 69;
+    --background-end-rgb: 214, 107, 72;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-size: 100% 100%;
+  background-position: 0px 0px;
+  background-image: conic-gradient(
+    from 270deg at 50% 50%,
+    #000000 0%,
+    #dc844a 8%,
+    #dc844a 13%,
+    #982fa7 20%,
+    #982fa7 32%,
+    #27428c 40%,
+    #27428cff 46%,
+    #000000 51%,
+    #dc844a 56%,
+    #dc844a 61%,
+    #243988 68%,
+    #243988 89%,
+    #107a5b 92%,
+    #107a5b 93%,
+    #000000 100%
+  );
+}
+
+.header-gradient {
+  background-size: 100% 100%;
+  background-position: 0px 0px;
+  background-image: linear-gradient(
+    90deg,
+    #073aff 0%,
+    #3e68b9 24%,
+    #992ea8 47%,
+    #c75a0c 77%,
+    #c2464a 100%
+  );
+}
+.player {
+  @apply bg-gradient-to-br from-purple-500/80 via-transparent to-red-600;
+}
+
+.EmojiPickerReact {
+  &.epr-dark-theme {
+    --epr-bg-color: #0a0a1f;
+    --epr-emoji-size: 24px;
+    --epr-category-label-bg-color: 0, 0, 0;
+    --epr-category-label-bg-color: black !important;
+    --epr-emoji-variation-picker-bg-color: red;
+    --epr-search-input-bg-color: #0a0a1f !important;
+    position: absolute !important;
+    @apply bg-[#0A0A1F] p-4  rounded-2xl -mt-12 border border-black-inactive/10 shadow-sky-700 shadow bottom-16 -left-2;
+    &.epr-emoji-variation-picker {
+      @apply bg-red-400;
+    }
+  }
+}
+.epr-body {
+  &::-webkit-scrollbar {
+    @apply bg-sky-500;
+    width: 4px !important;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    max-height: 10px;
+    background-color: #0a0a1f;
+  }
+}
+.__EmojiPicker__.epr-emoji-img {
+  font-size: 32px !important;
+  height: 32px !important;
+  width: 32px !important;
 }
