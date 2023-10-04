@@ -5,7 +5,7 @@ import VideoDescription from "../video-description/VideoDescription";
 interface IPlayer {}
 export default function Player({}: IPlayer) {
   return (
-    <div className="relative col-span-3 flex flex-col justify-between">
+    <div className="relative col-span-8 flex flex-col justify-between">
       <div>
         <div className="relative aspect-4/3 bg-primary rounded-2xl -mt-12 overflow-hidden ">
           <div className="absolute player top-0 left-0 right-0 bottom-0  opacity-70"></div>

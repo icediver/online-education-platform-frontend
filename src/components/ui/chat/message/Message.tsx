@@ -43,7 +43,7 @@ export default function Message({
           <>
             <div
               className={clsx(
-                "text-xs w-full py-3 px-2  rounded-xl",
+                "text-[0.7rem] w-full py-3 px-2  rounded-xl",
                 isMessageFromCurrentUser
                   ? "bg-gradient-to-r from-violet-600 to-orange-600"
                   : "bg-black border border-gray-400/20",
@@ -58,13 +58,18 @@ export default function Message({
           </>
         )}
         {image && image !== "" && (
-          <Image
-            src={image}
-            alt="image"
-            width={200}
-            height={100}
-            className={"my-1 rounded-xl"}
-          />
+          <>
+            <Image
+              src={image}
+              alt="image"
+              width={150}
+              height={100}
+              className={"my-1 rounded-xl"}
+            />
+            <div className="text-white/30 mt-1 text-[0.7rem]">
+              {timeSince(createdAt)}
+            </div>{" "}
+          </>
         )}
       </div>
     </div>

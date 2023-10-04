@@ -12,7 +12,7 @@ interface ILayoutBoard {
 export default function LayoutBoard({ children }: ILayoutBoard) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   return (
-    <main className=" min-h-screen w-2/3  mx-auto p-16">
+    <main className=" min-h-screen w-3/4  mx-auto p-16">
       <div className="relative min-h-[calc(100vh_-_8rem)] rounded-3xl bg-black flex overflow-hidden">
         <Sidebar isSidebarOpen={isSidebarOpen} />
         <div
