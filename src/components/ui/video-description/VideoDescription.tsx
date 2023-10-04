@@ -10,7 +10,7 @@ export default function VideoDescription({}: IVideoDescription) {
       <span className="text-gray-500 ">Chapter 5</span>
       <span> - Basic letter drawing</span>
       <div className="border-b border-gray-400/20 mt-5"></div>
-      <div className="py-4 text-xs">Overview</div>
+      <span className="py-4 headers-gradient text-xs">Overview</span>
       <p className="text-gray-600 mb-5">
         Nurture yourself while you practice your drawing skills with two
         distinct and meditative techiques. One-line drawing is trendy. but it is
@@ -18,7 +18,7 @@ export default function VideoDescription({}: IVideoDescription) {
         One-line while you practice your drawing skills with two ...
         <span className="text-xs text-white"> More</span>
       </p>
-      <div className="pb-4 text-xs">Chapter topics</div>
+      <span className="pb-4 text-xs headers-gradient">Chapter topics</span>
       <p className="text-gray-600 mb-2">
         <span className="text-xs text-white">01 </span>
         Moving Beyond Trials and Tribulations
