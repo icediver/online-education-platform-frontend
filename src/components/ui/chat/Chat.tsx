@@ -1,13 +1,16 @@
-"use client";
 import styles from "./Chat.module.scss";
 import clsx from "clsx";
 import ChatHeader from "./chat-header/ChatHeader";
 import ChatMessages from "./chat-messages/ChatMessages";
 import { useChat } from "@/hooks/useChat";
 import SendMessage from "./send-message/SendMessage";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
-export default function Chat() {
+export default function Chat({
+  setIsFocused,
+}: {
+  setIsFocused: Dispatch<SetStateAction<boolean>>;
+}) {
   const [activeButton, setActiveButton] = useState(0);
 
   const { chatRoom } = useChat("1");
@@ -30,7 +33,7 @@ export default function Chat() {
           {activeButton === 1 && <div>Users</div>}
         </div>
       </div>
-      <SendMessage />
+      <SendMessage setIsFocused={setIsFocused} />
     </div>
   );
 }

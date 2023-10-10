@@ -1,12 +1,14 @@
 import { FiPaperclip } from "react-icons/fi";
 import ModalSendImage from "../../modal-send-image/ModalSendImage";
-import { useRef, useState } from "react";
-import { useUpload } from "../../useUpload";
+import { Dispatch, SetStateAction, useRef } from "react";
 import { usePreview } from "@/hooks/usePreview";
 import SendMessage from "../../send-message/SendMessage";
-import { IMessageFields } from "@/types/message.interface";
 
-export default function UploadFile() {
+interface IUploadFile {
+  setIsFocused: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function UploadFile({ setIsFocused }: IUploadFile) {
   const ref = useRef<HTMLInputElement>(null);
 
   const { onSelectFile, isModalOpen, preview, selectedFile, setIsModalOpen } =
@@ -32,6 +34,7 @@ export default function UploadFile() {
         </div>
         <div className="mt-1 mb-1 ml-4 text-xs text-gray-600">Add Message:</div>
         <SendMessage
+          setIsFocused={setIsFocused}
           isFilePicker={false}
           selectedFile={selectedFile || undefined}
           setIsModalOpen={setIsModalOpen}

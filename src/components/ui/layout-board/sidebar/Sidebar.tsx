@@ -19,7 +19,7 @@ export default function Sidebar({ isSidebarOpen }: { isSidebarOpen: boolean }) {
     <nav
       className={clsx(
         "w-1/4 p-5 border-r border-black-inactive/20 transition-all duration-500",
-        isSidebarOpen ? "" : "-ml-[325px]",
+        isSidebarOpen ? "" : "-ml-[368px]",
       )}
     >
       <SidebarHeader />

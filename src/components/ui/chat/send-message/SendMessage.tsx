@@ -9,6 +9,7 @@ import {
   Dispatch,
   MouseEventHandler,
   SetStateAction,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -20,11 +21,13 @@ interface ISendMessageForm {
   isFilePicker?: boolean;
   selectedFile?: File;
   setIsModalOpen?: Dispatch<SetStateAction<boolean>>;
+  setIsFocused: Dispatch<SetStateAction<boolean>>;
 }
 export default function SendMessage({
   isFilePicker = true,
   selectedFile,
   setIsModalOpen,
+  setIsFocused,
 }: ISendMessageForm) {
   const [messageText, setMessageText] = useState("");
   const { user } = useAuth();
@@ -32,6 +35,15 @@ export default function SendMessage({
   const { sendMessage } = useChat("1");
   const ref = useRef<HTMLTextAreaElement>(null);
   const { ref: refOutside, isShow, setIsShow } = useOutside(false);
+
+  useEffect(() => {
+    ref.current?.addEventListener("focus", () => setIsFocused(true));
+    ref.current?.addEventListener("blur", () => setIsFocused(false));
+    return () => {
+      ref.current?.removeEventListener("focus", () => setIsFocused(true));
+      ref.current?.removeEventListener("blur", () => setIsFocused(false));
+    };
+  }, []);
 
   const send: MouseEventHandler<HTMLButtonElement> = async () => {
     const selectedImage = selectedFile ? await uploadFile(selectedFile) : "";
@@ -59,7 +71,7 @@ export default function SendMessage({
           >
             <FaFaceSmile />
           </button>
-          {isFilePicker && <UploadFile />}
+          {isFilePicker && <UploadFile setIsFocused={setIsFocused} />}
         </div>
         <textarea
           ref={ref}
@@ -68,7 +80,9 @@ export default function SendMessage({
             styles.message,
           )}
           value={messageText}
-          onChange={(e) => setMessageText(e.target.value)}
+          onChange={(e) => {
+            setMessageText(e.target.value);
+          }}
         />
 
         <SendMessageButton type="button" onClick={send} />
