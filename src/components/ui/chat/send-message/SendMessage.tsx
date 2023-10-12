@@ -8,6 +8,7 @@ import styles from "./SendMessage.module.scss";
 import {
   Dispatch,
   MouseEventHandler,
+  RefObject,
   SetStateAction,
   useEffect,
   useRef,
@@ -16,44 +17,38 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import { useChat } from "@/hooks/useChat";
 import { useUpload } from "../useUpload";
+import { useFocused } from "@/hooks/useFocused";
 
 interface ISendMessageForm {
   isFilePicker?: boolean;
   selectedFile?: File;
   setIsModalOpen?: Dispatch<SetStateAction<boolean>>;
-  setIsFocused: Dispatch<SetStateAction<boolean>>;
+  chatRoomId: string;
 }
 export default function SendMessage({
   isFilePicker = true,
   selectedFile,
   setIsModalOpen,
-  setIsFocused,
+  chatRoomId,
 }: ISendMessageForm) {
   const [messageText, setMessageText] = useState("");
   const { user } = useAuth();
   const { uploadFile, fileUrl } = useUpload();
-  const { sendMessage } = useChat("1");
-  const ref = useRef<HTMLTextAreaElement>(null);
+  const { sendMessage } = useChat(chatRoomId);
+  // const ref = useRef<HTMLTextAreaElement>(null);
   const { ref: refOutside, isShow, setIsShow } = useOutside(false);
-
-  useEffect(() => {
-    ref.current?.addEventListener("focus", () => setIsFocused(true));
-    ref.current?.addEventListener("blur", () => setIsFocused(false));
-    return () => {
-      ref.current?.removeEventListener("focus", () => setIsFocused(true));
-      ref.current?.removeEventListener("blur", () => setIsFocused(false));
-    };
-  }, []);
+  const ref = useFocused();
 
   const send: MouseEventHandler<HTMLButtonElement> = async () => {
     const selectedImage = selectedFile ? await uploadFile(selectedFile) : "";
     if (messageText !== "" || selectedImage !== "") {
       const message = {
-        conversationId: 1,
+        conversationId: chatRoomId,
         text: messageText,
         image: selectedImage,
         userFromId: user?.id,
       };
+      console.log(message);
       sendMessage(message);
       setMessageText("");
     }
@@ -71,10 +66,10 @@ export default function SendMessage({
           >
             <FaFaceSmile />
           </button>
-          {isFilePicker && <UploadFile setIsFocused={setIsFocused} />}
+          {isFilePicker && <UploadFile chatRoomId={chatRoomId} />}
         </div>
         <textarea
-          ref={ref}
+          ref={ref as RefObject<HTMLTextAreaElement>}
           className={clsx(
             "bg-[#0A0A1F] h-8 border-none focus-visible:outline-none resize-none ",
             styles.message,

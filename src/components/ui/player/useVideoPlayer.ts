@@ -1,4 +1,6 @@
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useStore } from "react-redux";
 
 export interface IVideoElement extends HTMLVideoElement {
   msRequestFullscreen?: () => void;
@@ -12,7 +14,8 @@ export const useVideoPlayer = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [videoTime, setVideoTime] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [isFocused, setIsFocused] = useState(false);
+
+  const isFocused = useTypedSelector((state) => state.focuse.isFocused);
 
   useEffect(() => {
     const originalDuration = videoRef.current?.duration;
@@ -122,8 +125,7 @@ export const useVideoPlayer = () => {
         videoTime,
         toggleVideo,
       },
-      setIsFocused,
     }),
-    [isPlaying, currentTime, progress, videoTime, toggleVideo, isFocused],
+    [isPlaying, currentTime, progress, videoTime, toggleVideo],
   );
 };

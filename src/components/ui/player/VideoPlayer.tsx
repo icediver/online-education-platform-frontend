@@ -3,16 +3,11 @@ import { FC, useEffect } from "react";
 import { useVideoPlayer } from "./useVideoPlayer";
 import VideoDescription from "../video-description/VideoDescription";
 import Remote from "./remote/Remote";
+import { IVideo } from "@/types/video.interface";
 
-const VideoPlayer: FC<{ videoSource: string; isFocused: boolean }> = ({
-  videoSource,
-  isFocused,
-}) => {
-  const { actions, video, videoRef, setIsFocused } = useVideoPlayer();
-
-  useEffect(() => {
-    setIsFocused(isFocused);
-  }, [isFocused]);
+const VideoPlayer: FC<{ video: IVideo }> = ({ video: currentVideo }) => {
+  const { actions, video, videoRef } = useVideoPlayer();
+  const { source, conversation, ...description } = currentVideo;
 
   return (
     <div className="col-span-8 h-[740px] -translate-y-12 overflow-auto scrolbar-hidden rounded-t-2xl">
@@ -22,7 +17,11 @@ const VideoPlayer: FC<{ videoSource: string; isFocused: boolean }> = ({
         }
       >
         <>
-          <video ref={videoRef} src={`${videoSource}#t=0`} preload="metadata" />
+          <video
+            ref={videoRef}
+            src={`${currentVideo.source}#t=0`}
+            preload="metadata"
+          />
 
           <div
             className={
@@ -56,7 +55,7 @@ const VideoPlayer: FC<{ videoSource: string; isFocused: boolean }> = ({
         </>
       </div>
       <Remote isPlaying={video.isPlaying} actions={actions} />
-      <VideoDescription />
+      <VideoDescription {...description} />
     </div>
   );
 };

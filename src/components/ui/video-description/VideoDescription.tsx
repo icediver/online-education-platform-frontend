@@ -1,11 +1,14 @@
 "use client";
 
+import { IVideo } from "@/types/video.interface";
 import { useEffect, useState } from "react";
-const overview =
-  "Nurture yourself while you practice your drawing skills with two distinct and meditative techiques. One-line drawing is trendy. but it is way to break down shapes two distinct and meditative techniques. One - line while you practice your drawing skills with two Nurture yourself while you practice your drawing skills with two distinct and meditative techiques. One-line drawing is trendy. but it is way to break down shapes two distinct and meditative techniques. One - line while you practice your drawing skills with two Nurture yourself while you practice your drawing skills with two distinct and meditative techiques. One-line drawing is trendy. but it is way to break down shapes two distinct and meditative techniques. One - line while you practice your drawing skills with two";
-
-interface IVideoDescription {}
-export default function VideoDescription({}: IVideoDescription) {
+interface IVideoDescription extends Omit<IVideo, "source" | "conversation"> {}
+export default function VideoDescription({
+  chapterTopics,
+  overview,
+  title,
+  chapter,
+}: IVideoDescription) {
   const [isShowFullOverview, setIsShowFullOverview] = useState(false);
   const limit = 52;
   const [overviewText, setOverviewText] = useState("");
@@ -25,12 +28,10 @@ export default function VideoDescription({}: IVideoDescription) {
     setIsShowFullOverview(!isShowFullOverview);
   }
   return (
-    <div className="mt-14 max-h-16 text-[0.7rem]">
-      <h1 className="text-base mb-2">
-        The Business of illustration and Lettering
-      </h1>
-      <span className="text-gray-500 ">Chapter 5</span>
-      <span> - Basic letter drawing</span>
+    <div className="mt-14 max-h-16 text-[0.7rem] z-0">
+      <h1 className="text-base mb-2">{title}</h1>
+      <span className="text-gray-500 ">{chapter.split("-")[0]}</span>
+      <span> - {chapter.split("-")[1]}</span>
       <div className="border-b border-gray-400/20 mt-5 "></div>
       <h1 className="my-2 headers-gradient text-xs">Overview</h1>
       <p className="text-gray-600 mb-5">
@@ -44,13 +45,13 @@ export default function VideoDescription({}: IVideoDescription) {
         <span className="text-xs text-white">01 </span>
         Moving Beyond Trials and Tribulations
         <br />
-        {overview + overview + overview}
+        {chapterTopics}
       </p>
       <p className="text-gray-600 mb-2">
         <span className="text-xs text-white">02 </span>
         Moving Beyond Trials and Tribulations
         <br />
-        {overview + overview + overview}
+        {chapterTopics}
       </p>
     </div>
   );

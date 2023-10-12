@@ -9,7 +9,7 @@ export default function ChatHeader({
   setActiveButton,
 }: IChatHeader) {
   return (
-    <div className="flex gap-4 flex-row justify-between">
+    <div className="flex gap-4 flex-row justify-between ">
       <ChatButton
         onClick={() => setActiveButton(0)}
         isActive={activeButton === 0}

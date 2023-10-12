@@ -3,7 +3,6 @@ import { ReactNode } from "react";
 import { TbUsers, TbUsersMinus } from "react-icons/tb";
 import { AiOutlinePlus } from "react-icons/ai";
 import Button from "../../button/Button";
-import { FiSearch } from "react-icons/fi";
 import Search from "./search/Search";
 
 interface IHeader {

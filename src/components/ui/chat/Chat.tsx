@@ -6,14 +6,14 @@ import { useChat } from "@/hooks/useChat";
 import SendMessage from "./send-message/SendMessage";
 import { Dispatch, SetStateAction, useState } from "react";
 
-export default function Chat({
-  setIsFocused,
-}: {
-  setIsFocused: Dispatch<SetStateAction<boolean>>;
-}) {
+interface IChat {
+  chatRoomId: string;
+}
+
+export default function Chat({ chatRoomId }: IChat) {
   const [activeButton, setActiveButton] = useState(0);
 
-  const { chatRoom } = useChat("1");
+  const { chatRoom } = useChat(chatRoomId);
 
   return (
     <div className="relative col-span-4">
@@ -28,12 +28,12 @@ export default function Chat({
         />
         <div className={clsx("h-[580px] mt-4  overflow-auto", styles.chat)}>
           {activeButton === 0 && (
-            <ChatMessages messages={chatRoom.messages || []} />
+            <ChatMessages messages={chatRoom?.messages || []} />
           )}
           {activeButton === 1 && <div>Users</div>}
         </div>
       </div>
-      <SendMessage setIsFocused={setIsFocused} />
+      <SendMessage chatRoomId={chatRoomId} />
     </div>
   );
 }

@@ -5,10 +5,10 @@ import { usePreview } from "@/hooks/usePreview";
 import SendMessage from "../../send-message/SendMessage";
 
 interface IUploadFile {
-  setIsFocused: Dispatch<SetStateAction<boolean>>;
+  chatRoomId: string;
 }
 
-export default function UploadFile({ setIsFocused }: IUploadFile) {
+export default function UploadFile({ chatRoomId }: IUploadFile) {
   const ref = useRef<HTMLInputElement>(null);
 
   const { onSelectFile, isModalOpen, preview, selectedFile, setIsModalOpen } =
@@ -34,10 +34,10 @@ export default function UploadFile({ setIsFocused }: IUploadFile) {
         </div>
         <div className="mt-1 mb-1 ml-4 text-xs text-gray-600">Add Message:</div>
         <SendMessage
-          setIsFocused={setIsFocused}
           isFilePicker={false}
           selectedFile={selectedFile || undefined}
           setIsModalOpen={setIsModalOpen}
+          chatRoomId={chatRoomId}
         />
       </ModalSendImage>
     </>

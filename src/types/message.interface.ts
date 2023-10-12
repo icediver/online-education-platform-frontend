@@ -15,7 +15,7 @@ export interface ISendMessage
 export interface IMessageFields {
   text?: string;
   image?: string;
-  conversationId: number;
+  conversationId: string;
   userFromId: number | undefined;
 }
 
