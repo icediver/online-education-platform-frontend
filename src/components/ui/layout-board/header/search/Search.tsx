@@ -24,7 +24,7 @@ export default function Search() {
         className={"absolute left-2 top-2  text-lg text-black-inactive"}
       />
       {!!users?.data.length && searchTerm !== "" && (
-        <ul className="absolute bg-gray-700/20 backdrop-blur-xl z-50 w-full text-gray-300 rounded-lg text-xs p-4 mt-0.5 animate-opacity">
+        <ul className="absolute bg-gray-700/20 backdrop-blur-xl z-50 w-full text-gray-300 rounded-lg text-xs px-4 mt-0.5 animate-opacity">
           {users.data.map((user) => (
             <li className="flex items-center gap-5 my-4" key={user.email}>
               <Image

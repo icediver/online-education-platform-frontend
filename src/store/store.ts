@@ -10,13 +10,13 @@ import {
 } from "redux-persist";
 
 import { userSlice } from "./user/user.slice";
-import { focuseSlice } from "./focuse/focuse.slice";
+import { videoSlice } from "./video/video.slice";
 
 const isClient = typeof window !== "undefined";
 
 const combinedReducers = combineReducers({
   user: userSlice.reducer,
-  focuse: focuseSlice.reducer,
+  video: videoSlice.reducer,
 });
 
 let mainReducer = combinedReducers;

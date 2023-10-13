@@ -1,6 +1,6 @@
+import { useActions } from "@/hooks/useActions";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useStore } from "react-redux";
 
 export interface IVideoElement extends HTMLVideoElement {
   msRequestFullscreen?: () => void;
@@ -10,27 +10,39 @@ export interface IVideoElement extends HTMLVideoElement {
 
 export const useVideoPlayer = () => {
   const videoRef = useRef<IVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [videoTime, setVideoTime] = useState(0);
   const [progress, setProgress] = useState(0);
 
-  const isFocused = useTypedSelector((state) => state.focuse.isFocused);
+  const { isDisabledHotkey, isPause } = useTypedSelector(
+    (state) => state.video,
+  );
+  const { togglePlay } = useActions();
 
   useEffect(() => {
     const originalDuration = videoRef.current?.duration;
     if (originalDuration) setVideoTime(originalDuration);
   }, [videoRef.current?.duration]);
 
+  // const toggleVideo = useCallback(() => {
+  //   if (!isPlaying) {
+  //     videoRef.current?.play();
+  //     setIsPlaying(true);
+  //   } else {
+  //     videoRef.current?.pause();
+  //     setIsPlaying(false);
+  //   }
+  // }, [isPlaying]);
   const toggleVideo = useCallback(() => {
-    if (!isPlaying) {
+    if (!isPause) {
       videoRef.current?.play();
-      setIsPlaying(true);
     } else {
       videoRef.current?.pause();
-      setIsPlaying(false);
     }
-  }, [isPlaying]);
+  }, [isPause]);
+
+  useEffect(() => toggleVideo(), [isPause]);
 
   const forward = () => {
     if (videoRef.current) videoRef.current.currentTime += 5;
@@ -80,7 +92,9 @@ export const useVideoPlayer = () => {
   }, [videoRef.current?.currentTime]);
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) => {
-      if (!isFocused) {
+      console.log(e.key);
+      if (!isDisabledHotkey) {
+        console.log("false");
         switch (e.key) {
           case "ArrowRight":
             forward();
@@ -91,7 +105,9 @@ export const useVideoPlayer = () => {
           case " ":
             {
               e.preventDefault();
-              toggleVideo();
+              togglePlay();
+
+              console.log("play", isPause);
             }
             break;
           case "f":
@@ -107,7 +123,7 @@ export const useVideoPlayer = () => {
     return () => {
       document.removeEventListener("keydown", handleKeydown);
     };
-  }, [toggleVideo, isFocused]);
+  }, [isDisabledHotkey, isPause]);
 
   return useMemo(
     () => ({
@@ -119,13 +135,13 @@ export const useVideoPlayer = () => {
         toggleVideo,
       },
       video: {
-        isPlaying,
+        isPlaying: isPause,
         currentTime,
         progress,
         videoTime,
         toggleVideo,
       },
     }),
-    [isPlaying, currentTime, progress, videoTime, toggleVideo],
+    [isPause, currentTime, progress, videoTime, toggleVideo],
   );
 };

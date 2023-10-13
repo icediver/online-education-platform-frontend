@@ -54,7 +54,7 @@ const VideoPlayer: FC<{ video: IVideo }> = ({ video: currentVideo }) => {
           </div>
         </>
       </div>
-      <Remote isPlaying={video.isPlaying} actions={actions} />
+      <Remote actions={actions} />
       <VideoDescription {...description} />
     </div>
   );
