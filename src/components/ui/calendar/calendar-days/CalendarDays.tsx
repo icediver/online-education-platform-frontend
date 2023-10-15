@@ -45,8 +45,8 @@ export default function CalendarDays({ date, setDate }: ICalendarDays) {
             <div
               className={
                 day.selected
-                  ? "w-6 h-6 p-1.5 bg-pink-900 text-white rounded-full"
-                  : ""
+                  ? "w-6 h-6 p-1.5 bg-pink-900 text-white text-center rounded-full "
+                  : "text-center  cursor-pointer"
               }
             >
               {day.number}
