@@ -36,6 +36,7 @@ if (isClient) {
 
 export const store = configureStore({
   reducer: mainReducer,
+  devTools: true,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

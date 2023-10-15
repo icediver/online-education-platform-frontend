@@ -1,6 +1,17 @@
 "use client";
-import EmojiPicker, { Theme } from "emoji-picker-react";
+import { useActions } from "@/hooks/useActions";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 interface IDashboard {}
 export default function Dashboard({}: IDashboard) {
-  return <div className="text-center">Dashboard Page </div>;
+  const { getVideoById } = useActions();
+  const { video } = useTypedSelector((state) => state.video);
+
+  function clickHandler() {
+    getVideoById(1);
+  }
+  return (
+    <div className="text-center">
+      <button onClick={clickHandler}>try</button>
+    </div>
+  );
 }

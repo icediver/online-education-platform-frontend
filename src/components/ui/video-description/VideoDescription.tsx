@@ -33,14 +33,14 @@ export default function VideoDescription({
       <span className="text-gray-500 ">{chapter.split("-")[0]}</span>
       <span> - {chapter.split("-")[1]}</span>
       <div className="border-b border-gray-400/20 mt-5 "></div>
-      <h1 className="my-2 headers-gradient text-xs">Overview</h1>
+      <h1 className="my-2 text-gradient text-xs">Overview</h1>
       <p className="text-gray-600 mb-5">
         {overviewText} {!isShowFullOverview && " ... "}
         <button className="text-xs text-white" onClick={moreHandler}>
           {!isShowFullOverview ? "  More" : " Hide"}
         </button>
       </p>
-      <h1 className="pb-4 text-xs headers-gradient">Chapter topics</h1>
+      <h1 className="pb-4 text-xs text-gradient">Chapter topics</h1>
       <p className="text-gray-600 mb-2">
         <span className="text-xs text-white">01 </span>
         Moving Beyond Trials and Tribulations

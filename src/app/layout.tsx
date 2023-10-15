@@ -1,5 +1,5 @@
 import LayoutBoard from "@/components/ui/layout-board/LayoutBoard";
-import "./globals.css";
+import "@/assets/styles/globals.scss";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "@/providers/Providers";

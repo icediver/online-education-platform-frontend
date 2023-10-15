@@ -61,6 +61,18 @@ export const plugins = [
             display: "none",
           },
         },
+        ".transparent-panel": {
+          "background-color": "rgba(10,10,31,0.65)",
+          // "background-color": "rgba(0,1,13,0.65)",
+          borderRadius: "0.75rem",
+          "backdrop-filter": "blur(24px)",
+        },
+        ".text-gradient": {
+          background: "linear-gradient(90deg, #c731ef, #fe5f0c) ",
+          "-webkit-background-clip": "text",
+          color: "transparent",
+          "-webkit-text-fill-color": "transparent",
+        },
       });
   }),
 ];

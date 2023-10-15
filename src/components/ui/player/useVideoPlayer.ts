@@ -10,7 +10,6 @@ export interface IVideoElement extends HTMLVideoElement {
 
 export const useVideoPlayer = () => {
   const videoRef = useRef<IVideoElement>(null);
-  // const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [videoTime, setVideoTime] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -25,15 +24,6 @@ export const useVideoPlayer = () => {
     if (originalDuration) setVideoTime(originalDuration);
   }, [videoRef.current?.duration]);
 
-  // const toggleVideo = useCallback(() => {
-  //   if (!isPlaying) {
-  //     videoRef.current?.play();
-  //     setIsPlaying(true);
-  //   } else {
-  //     videoRef.current?.pause();
-  //     setIsPlaying(false);
-  //   }
-  // }, [isPlaying]);
   const toggleVideo = useCallback(() => {
     if (!isPause) {
       videoRef.current?.play();
@@ -92,9 +82,7 @@ export const useVideoPlayer = () => {
   }, [videoRef.current?.currentTime]);
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) => {
-      console.log(e.key);
       if (!isDisabledHotkey) {
-        console.log("false");
         switch (e.key) {
           case "ArrowRight":
             forward();
@@ -106,8 +94,6 @@ export const useVideoPlayer = () => {
             {
               e.preventDefault();
               togglePlay();
-
-              console.log("play", isPause);
             }
             break;
           case "f":

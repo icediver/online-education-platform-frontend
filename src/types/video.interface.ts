@@ -15,3 +15,5 @@ export interface IVideo {
     messages: string[];
   };
 }
+
+export type TypeVideoUpdate = Pick<IVideo, "id" | "createdAt">;

@@ -2,7 +2,7 @@ import { BiMicrophone, BiMicrophoneOff } from "react-icons/bi";
 import RemotePlayerButton from "./remote-player-button/RemotePlayerButton";
 import { useState } from "react";
 import { FaForward, FaPause, FaPlay } from "react-icons/fa";
-import { MdFullscreen, MdHistory } from "react-icons/md";
+import { MdFullscreen } from "react-icons/md";
 import { FaBackward } from "react-icons/fa6";
 import { useActions } from "@/hooks/useActions";
 import { useTypedSelector } from "@/hooks/useTypedSelector";

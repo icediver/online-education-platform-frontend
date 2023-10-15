@@ -35,7 +35,6 @@ export const userSlice = createSlice({
         state.user = payload.user;
       })
       .addCase(login.rejected, (state, { payload }) => {
-        console.log(payload);
         state.isLoading = false;
         state.user = null;
       })

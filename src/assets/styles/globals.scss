@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "calendar.scss";
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -86,11 +87,4 @@ body {
   font-size: 32px !important;
   height: 32px !important;
   width: 32px !important;
-}
-
-.headers-gradient {
-  background: linear-gradient(90deg, #c731ef, #fe5f0c);
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
 }
