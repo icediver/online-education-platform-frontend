@@ -10,7 +10,7 @@ const VideoPlayer: FC<{ video: IVideo }> = ({ video: currentVideo }) => {
   const { source, conversation, ...description } = currentVideo;
 
   return (
-    <div className="col-span-8 h-[740px] -translate-y-12 overflow-auto scrolbar-hidden rounded-t-2xl">
+    <div className="col-span-5 h-[740px] -translate-y-12 overflow-auto scrolbar-hidden rounded-t-2xl">
       <div
         className={
           "rounded-2xl overflow-hidden shadow-xl relative animate-opacity mb-10 aspect-video  bg-[#0B091F]"

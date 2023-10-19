@@ -1,18 +1,21 @@
 import { useActions } from "@/hooks/useActions";
 import { useFocused } from "@/hooks/useFocused";
 import { useSearchUsers } from "@/hooks/useSearchUsers";
+import clsx from "clsx";
 import Image from "next/image";
-import { RefObject, useEffect, useState } from "react";
+import { HTMLAttributes, RefObject, useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
-export default function Search() {
+interface ISearch extends HTMLAttributes<HTMLDivElement> {}
+
+export default function Search({ className }: ISearch) {
   const { searchTerm, setSearchTerm, users, handleSearch } = useSearchUsers();
   const ref = useFocused();
   return (
-    <div className="relative">
+    <div className={clsx("relative", className)}>
       <input
         ref={ref as RefObject<HTMLInputElement>}
-        className="w-64 rounded-lg bg-black/50 border-black/70 text-xs focus-visible:outline-none px-10 py-2"
+        className="relative w-full rounded-lg bg-black/50 border-black/70 text-xs focus-visible:outline-none px-10 py-2.5"
         placeholder="Search..."
         value={searchTerm}
         onKeyPress={(key) => {

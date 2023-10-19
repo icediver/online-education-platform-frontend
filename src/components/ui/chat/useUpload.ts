@@ -6,7 +6,6 @@ import { useMutation } from "@tanstack/react-query";
 export const useUpload = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [fileUrl, setFileUrl] = useState("");
-  useEffect(() => console.log(fileUrl), [fileUrl]);
   const { mutateAsync } = useMutation({
     mutationKey: ["upload file"],
     mutationFn: (file: FormData) => MediaService.upload(file),

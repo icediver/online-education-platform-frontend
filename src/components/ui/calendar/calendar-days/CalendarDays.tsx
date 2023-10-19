@@ -1,38 +1,19 @@
 import { Dispatch, SetStateAction } from "react";
+import { getMonthExamShedule } from "@/utils/date.utils";
 
 interface ICalendarDays {
   date: Date;
-  setDate: Dispatch<SetStateAction<Date>>;
+  selectedDate: Date;
+  setSelectedDate: Dispatch<SetStateAction<Date>>;
 }
-export default function CalendarDays({ date, setDate }: ICalendarDays) {
-  let firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-  let weekdayOfFirstDay = firstDayOfMonth.getDay();
-  let currentDays = [];
-  for (let day = 0; day < 42; day++) {
-    if (day === 0 && weekdayOfFirstDay === 0) {
-      firstDayOfMonth.setDate(firstDayOfMonth.getDate() - 7);
-    } else if (day === 0) {
-      firstDayOfMonth.setDate(
-        firstDayOfMonth.getDate() + (day - weekdayOfFirstDay),
-      );
-    } else {
-      firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1);
-    }
-
-    let calendarDay = {
-      currentMonth: firstDayOfMonth.getMonth() === date.getMonth(),
-      date: new Date(firstDayOfMonth),
-      month: firstDayOfMonth.getMonth(),
-      number: firstDayOfMonth.getDate(),
-      selected: firstDayOfMonth.toDateString() === date.toDateString(),
-      year: firstDayOfMonth.getFullYear(),
-    };
-
-    currentDays.push(calendarDay);
-  }
+export default function CalendarDays({
+  date,
+  selectedDate,
+  setSelectedDate,
+}: ICalendarDays) {
   return (
     <div className="grid-cols-7 grid text-[0.6rem] text-white/60  ">
-      {currentDays.map((day) => {
+      {getMonthExamShedule({ date, selectedDate }).map((day) => {
         return (
           <div
             key={day.date.toLocaleString()}
@@ -40,7 +21,9 @@ export default function CalendarDays({ date, setDate }: ICalendarDays) {
               "w-10 h-6 relative flex justify-center items-center" +
               (day.currentMonth ? " text-gray-700" : "")
             }
-            onClick={() => setDate(new Date(day.year, day.month, day.number))}
+            onClick={() =>
+              setSelectedDate(new Date(day.year, day.month, day.number))
+            }
           >
             <div
               className={

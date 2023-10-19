@@ -17,7 +17,7 @@ export default function LiveClass({}: ILiveClass) {
   });
 
   return (
-    <div className="px-5 grid gap-5 grid-cols-12 animate-opacity">
+    <div className="px-5 grid gap-5 grid-cols-7 animate-opacity">
       {data && (
         <>
           <VideoPlayer video={data[currentVideo]} />

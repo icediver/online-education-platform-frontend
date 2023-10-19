@@ -1,29 +1,46 @@
 "use client";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import CalendarDays from "./calendar-days/CalendarDays";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { months, weekdays } from "@/utils/date.utils";
 
-const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-interface ICalendar {}
-export default function Calendar({}: ICalendar) {
+interface ICalendar {
+  selectedDate: Date;
+  setSelectedDate: Dispatch<SetStateAction<Date>>;
+}
+export default function Calendar(props: ICalendar) {
   const [date, setDate] = useState(new Date());
   return (
     <div className="transparent-panel pb-3">
-      <div className="p-4">
-        {months[date.getMonth()]} {date.getFullYear()}
+      <div className="p-4 flex justify-between">
+        <div className="inline-block ">
+          {months[date.getMonth()]} {date.getFullYear()}
+        </div>
+        <div>
+          <button
+            className="mr-2"
+            onClick={() => {
+              if (date.getMonth() == 0) {
+                setDate(new Date(date.getFullYear() - 1, 11, 1));
+              } else {
+                setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1));
+              }
+            }}
+          >
+            <BsChevronLeft />
+          </button>
+          <button
+            onClick={() => {
+              if (date.getMonth() == 11) {
+                setDate(new Date(date.getFullYear() + 1, 0, 1));
+              } else {
+                setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
+              }
+            }}
+          >
+            <BsChevronRight />
+          </button>
+        </div>
       </div>
       <div className="px-2 text-[0.6rem]">
         <div className="grid grid-cols-7 mb-2">
@@ -36,7 +53,7 @@ export default function Calendar({}: ICalendar) {
           })}
         </div>
         <div className="table">
-          <CalendarDays date={date} setDate={setDate} />
+          <CalendarDays date={date} {...props} />
         </div>
       </div>
     </div>

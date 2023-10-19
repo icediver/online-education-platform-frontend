@@ -4,6 +4,9 @@ import { TbUsers, TbUsersMinus } from "react-icons/tb";
 import { AiOutlinePlus } from "react-icons/ai";
 import Button from "../../button/Button";
 import Search from "./search/Search";
+import { usePathname, useRouter } from "next/navigation";
+import HeaderLiveClass from "./header-live-class/HeaderLiveClass";
+import HeaderExam from "../header-exam/HeaderExam";
 
 interface IHeader {
   children?: ReactNode;
@@ -11,38 +14,18 @@ interface IHeader {
 }
 
 export default function Header({ children, isSidebarOpen }: IHeader) {
+  const path = usePathname();
   return (
     <div
       className={clsx(
-        "flex justify-between items-start w-full h-32 header-gradient rounded-tr-2xl pl-10 pr-5 py-5 animate-opacity",
+        "flex justify-between items-start w-full h-32 header-gradient rounded-tr-2xl pl-8 pr-5 py-5 animate-opacity",
         {
           ["rounded-tl-2xl"]: !isSidebarOpen,
         },
       )}
     >
-      <div className="flex gap-10 mt-2">
-        <div className="flex gap-2 items-center text-xs">
-          <TbUsers />
-          Invited to the class
-          <div className="bg-gray-900/40 border inset-1 border-gray-900/70 w-5 h-5 rounded text-[0.6rem] flex justify-center items-center">
-            52
-          </div>
-        </div>
-        <div className="flex gap-2 items-center text-xs">
-          <TbUsersMinus />
-          Absent people
-          <div className="bg-gray-900/40 border border-gray-900/70 w-5 h-5 rounded text-[0.6rem] flex justify-center items-center">
-            52
-          </div>
-        </div>
-      </div>
-      <div className="flex gap-10">
-        <Button>
-          <AiOutlinePlus />
-          Add People
-        </Button>
-        <Search />
-      </div>
+      {path === "/live-class" && <HeaderLiveClass />}
+      {path === "/exam" && <HeaderExam />}
     </div>
   );
 }

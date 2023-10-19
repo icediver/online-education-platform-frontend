@@ -16,7 +16,7 @@ export default function Chat({ chatRoomId }: IChat) {
   const { chatRoom } = useChat(chatRoomId);
 
   return (
-    <div className="relative col-span-4">
+    <div className="relative col-span-2">
       <div
         className={clsx(
           "h-[660px] bg-[#0A0A1F] p-4   rounded-2xl -mt-12 border border-black-inactive/10 ",

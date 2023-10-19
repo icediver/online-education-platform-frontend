@@ -48,7 +48,6 @@ export default function SendMessage({
         image: selectedImage,
         userFromId: user?.id,
       };
-      console.log(message);
       sendMessage(message);
       setMessageText("");
     }
@@ -58,7 +57,7 @@ export default function SendMessage({
   return (
     <>
       <div className="bg-[#0A0A1F] p-4 flex  justify-between items-center  border border-black-inactive/10 h-[3.5rem] rounded-2xl mt-5">
-        <div className="text-black-inactive">
+        <div className="text-black-inactive w-12">
           <button
             type="button"
             className="mr-2"
@@ -71,7 +70,7 @@ export default function SendMessage({
         <textarea
           ref={ref as RefObject<HTMLTextAreaElement>}
           className={clsx(
-            "bg-[#0A0A1F] h-8 border-none focus-visible:outline-none resize-none ",
+            "bg-[#0A0A1F] h-8 border-none focus-visible:outline-none resize-none w-44",
             styles.message,
           )}
           value={messageText}
