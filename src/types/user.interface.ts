@@ -6,6 +6,9 @@ export interface IUser {
   phone: string;
   isAdmin: boolean;
   position: string;
+  year?: number;
+  semester?: number;
+  department?: number;
 }
 
 export interface IUserFields extends IUser {

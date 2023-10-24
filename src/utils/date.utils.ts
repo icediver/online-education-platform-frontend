@@ -1,3 +1,5 @@
+import { IExam } from "@/types/exam.interface";
+
 interface IGetMonthExamShedule {
   date: Date;
   selectedDate: Date;
@@ -90,13 +92,6 @@ export function getWeekExamShedule(selectedDate: Date) {
     calculatedDates.push(newDate);
   }
   return calculatedDates;
-}
-
-interface IExam {
-  semester: string;
-  subject: string;
-  time: Date;
-  comment: string;
 }
 
 export const exams: IExam[] = [

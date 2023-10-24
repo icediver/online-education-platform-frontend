@@ -1,11 +1,17 @@
-import { axiosAuth } from "@/api/api.interceptor";
+import { axiosAuth, axiosClassic } from "@/api/api.interceptor";
 import { IUser } from "@/types/user.interface";
 
+interface IUserService {
+  searchTerm?: string;
+  department?: string;
+}
+
 export const UserService = {
-  async getAll(searchTerm: string) {
-    const users = await axiosAuth.get<IUser[]>(
-      `/users?SearchTerm=${searchTerm}`,
-    );
+  async getAll(queryData = {} as IUserService) {
+    console.log(queryData);
+    const { data: users } = await axiosClassic.get<IUser[]>(`/users`, {
+      params: queryData,
+    });
     return users;
   },
 };

@@ -6,7 +6,8 @@ import Button from "../../button/Button";
 import Search from "./search/Search";
 import { usePathname, useRouter } from "next/navigation";
 import HeaderLiveClass from "./header-live-class/HeaderLiveClass";
-import HeaderExam from "../header-exam/HeaderExam";
+import HeaderExam from "./header-exam/HeaderExam";
+import HeaderStudents from "./header-students/HeaderStudents";
 
 interface IHeader {
   children?: ReactNode;
@@ -26,6 +27,7 @@ export default function Header({ children, isSidebarOpen }: IHeader) {
     >
       {path === "/live-class" && <HeaderLiveClass />}
       {path === "/exam" && <HeaderExam />}
+      {path === "/students" && <HeaderStudents />}
     </div>
   );
 }

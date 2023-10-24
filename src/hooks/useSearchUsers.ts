@@ -10,12 +10,10 @@ export const useSearchUsers = () => {
     enabled: !!debouncedSearch,
     queryKey: ["search users", debouncedSearch],
     queryFn: async () => {
-      const users = await UserService.getAll(debouncedSearch);
+      const users = await UserService.getAll({ searchTerm: debouncedSearch });
       return users;
     },
-    onSuccess: ({ data }) => {
-      return data;
-    },
+    onSuccess: (data) => console.log(data),
   });
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {

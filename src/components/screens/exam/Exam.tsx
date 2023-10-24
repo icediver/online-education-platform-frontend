@@ -6,14 +6,13 @@ import CurrentWeek from "./current-week/CurrentWeek";
 import { getWeekExamShedule, months } from "@/utils/date.utils";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ExamFooter from "./exam-footer/ExamFooter";
+import { IExam } from "@/types/exam.interface";
 
-interface IExam {}
-export default function Exam({}: IExam) {
+export default function Exam({ exams }: { exams: IExam[] }) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   function getLastDayOfMonth(year: number, month: number) {
     return new Date(year, month + 1, 0);
   }
-
   return (
     <div className="-mt-20 ">
       <div className="mb-2.5 mx-8 flex justify-between w-48 items-center">
@@ -45,7 +44,7 @@ export default function Exam({}: IExam) {
       <div className="grid grid-cols-8 gap-6 px-4 w-full  ">
         <div className="col-span-6 grid grid-cols-5 gap-6">
           <CurrentDate selectedDate={selectedDate} />
-          <CurrentWeek selectedDate={selectedDate} />
+          <CurrentWeek selectedDate={selectedDate} exams={exams} />
           <ExamFooter />
         </div>
         <CurrentMonth

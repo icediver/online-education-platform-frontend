@@ -1,4 +1,4 @@
-import Search from "../header/search/Search";
+import Search from "../search/Search";
 
 interface IHeaderExam {}
 export default function HeaderExam({}: IHeaderExam) {

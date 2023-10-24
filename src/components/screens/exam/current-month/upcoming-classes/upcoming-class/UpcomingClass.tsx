@@ -10,7 +10,7 @@ export default function UpcomingClass({
 }: IUpcomingClass) {
   return (
     <div className="flex items-center my-8">
-      <div className="relative rounded-2xl py-3 w-14 -rotate-90">
+      <div className="relative rounded-2xl py-2.5 w-12 -rotate-90">
         <div
           className="absolute -inset-px bg-gradient-to-r from-purple-700 to-orange-700 rounded-2xl"
           aria-hidden="true"
