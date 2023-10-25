@@ -8,7 +8,6 @@ interface IUserService {
 
 export const UserService = {
   async getAll(queryData = {} as IUserService) {
-    console.log(queryData);
     const { data: users } = await axiosClassic.get<IUser[]>(`/users`, {
       params: queryData,
     });

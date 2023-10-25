@@ -16,6 +16,5 @@ async function getData() {
 
 export default async function StudentsPage() {
   const data = await getData();
-  console.log(data, "page");
   return <Students students={data} />;
 }

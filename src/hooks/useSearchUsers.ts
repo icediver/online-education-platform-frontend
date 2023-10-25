@@ -13,7 +13,6 @@ export const useSearchUsers = () => {
       const users = await UserService.getAll({ searchTerm: debouncedSearch });
       return users;
     },
-    onSuccess: (data) => console.log(data),
   });
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {

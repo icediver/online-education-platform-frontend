@@ -20,7 +20,6 @@ export const ModalLayout: FC<
         onClick={() => {
           setAnimationIn(false);
           onClose();
-          console.log("ModalLayout");
         }}
       />
       <div

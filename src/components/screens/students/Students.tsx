@@ -21,12 +21,10 @@ export default function Students({ students }: IStudents) {
     queryFn: async () =>
       await UserService.getAll(department !== "" ? { department } : {}),
     initialData: students,
-    onSuccess: (data) => console.log(data, "onSuccess"),
   });
   function selectDepartmentHandler(department: string) {
     setDepartment(department);
   }
-  useEffect(() => console.log(department), [department]);
   return (
     <div className="relative">
       <SelectFilter selectDepartmentHandler={selectDepartmentHandler} />
